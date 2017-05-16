@@ -1,7 +1,7 @@
 #import "DPLRegularExpression.h"
 
-static NSString * const DPLNamedGroupComponentPattern = @":[a-zA-Z0-9-_][^/]+";
-static NSString * const DPLRouteParameterPattern      = @":[a-zA-Z0-9-_]+";
+static NSString * const DPLNamedGroupComponentPattern = @"@[a-zA-Z0-9-_][^/]+";
+static NSString * const DPLRouteParameterPattern      = @"@[a-zA-Z0-9-_]+";
 static NSString * const DPLURLParameterPattern        = @"([^/]+)";
 
 @implementation DPLRegularExpression
@@ -123,7 +123,7 @@ static NSString * const DPLURLParameterPattern        = @"([^/]+)";
         NSTextCheckingResult *foundGroupName = [componentMatches firstObject];
         if (foundGroupName) {
             NSString *stringToReplace  = [namedExpression substringWithRange:foundGroupName.range];
-            NSString *variableName     = [stringToReplace stringByReplacingOccurrencesOfString:@":"
+            NSString *variableName     = [stringToReplace stringByReplacingOccurrencesOfString:@"@"
                                                                                     withString:@""];
             
             [groupNames addObject:variableName];
